@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\masyarakatt_rahma;
+use App\Models\masyarakatt_rahma;
 use Illuminate\Http\Request;
 
 class MasyarakattRahmaController extends Controller
@@ -16,6 +16,8 @@ class MasyarakattRahmaController extends Controller
     {
         //
     }
+
+    
 
     /**
      * Show the form for creating a new resource.

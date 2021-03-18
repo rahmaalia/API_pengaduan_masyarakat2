@@ -20,7 +20,10 @@ class CreatePetugassRahmasTable extends Migration
             $table->string('password');
             $table->string('telp');
             $table->enum('level',['admin','petugas']);
+            $table->UnsignedInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id_user')->on('users')->onDelete('cascade');
         });
     }
 
