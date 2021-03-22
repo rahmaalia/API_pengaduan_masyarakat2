@@ -12,5 +12,5 @@ class petugass_rahma extends Model
     ];
 
     protected $table='petugass_rahmas';
-    use HasFactory;
+    // use HasFactory;
 }

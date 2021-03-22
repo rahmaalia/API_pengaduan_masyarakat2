@@ -11,65 +11,17 @@ use Illuminate\Http\UploadedFile;
 class PengaduannRahmaController extends Controller
 {
 
-    public function inputFoto(Request $request){
-        // dd($request->all());
-        $attachment = new pengaduann_rahma;
-                    $target_dir = "admin/assets/media/task_schedule_attachments/";
-                    // $attachment->task_schedule_id = $schedule->id;
-                    // $attachment->uploaded_by = $id_pengguna;
-    
-                    #upload foto to database
-                    $file = $request->file('foto');
-        
-                    #JIKA FOLDERNYA BELUM ADA
-                    if (!File::isDirectory($target_dir)) {
-                        #MAKA FOLDER TERSEBUT AKAN DIBUAT
-                        File::makeDirectory($target_dir);
-                    }
-        
-                    #MEMBUAT NAME FILE DARI GABUNGAN TIMESTAMP DAN UNIQID()
-                    $fileName = 'Pengaduan' . '_' .uniqid(). '.' . $file->getClientOriginalExtension();
-        
-                    #UPLOAD ORIGINAN FILE (BELUM DIUBAH DIMENSINYA)
-                    Image::make($file)->save($target_dir . '/' . $fileName);
-                    foreach ($this->dimensions as $row) {
-        
-                        #MEMBUAT CANVAS IMAGE SEBESAR DIMENSI YANG ADA DI DALAM ARRAY 
-                        $canvas = Image::canvas($row, $row);
-        
-                        #RESIZE IMAGE SESUAI DIMENSI YANG ADA DIDALAM ARRAY 
-                        #DENGAN MEMPERTAHANKAN RATIO
-                        $resizeImage  = Image::make($file)->resize($row, $row, function($constraint) {
-                            $constraint->aspectRatio();
-                        });
-        
-                        #CEK JIKA FOLDERNYA BELUM ADA
-                        if (!File::isDirectory($target_dir . '/' . $row)) {
-                            #MAKA BUAT FOLDER DENGAN NAMA DIMENSI
-                            File::makeDirectory($target_dir . '/' . $row);
-                        }
-        
-                        #MEMASUKAN IMAGE YANG TELAH DIRESIZE KE DALAM CANVAS
-                        $canvas->insert($resizeImage, 'center');
-                        #SIMPAN IMAGE KE DALAM MASING-MASING FOLDER (DIMENSI)
-                        $canvas->save($target_dir . '/' . $row . '/' . $fileName);
-                    }
-        
-                    #SIMPAN DATA IMAGE YANG TELAH DI-UPLOAD
-                    $attachment->attachment     = $fileName;
-                    $attachment->type = "IMAGE";
-                    $attachment->save();
-    }
+
 
     public function addFotoPengaduan(Request $request){
 
         $request->validate([
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
         ]);
     
-        $imageName = $request->foto->getClientOriginalName();  
+        $imageName = $request->image->getClientOriginalName();  
      
-        $request->foto->move(public_path('images'), $imageName);
+        $request->image->move(public_path('foto'), $imageName);
         
          return response()->json([
                         'status' => true,
@@ -130,6 +82,7 @@ class PengaduannRahmaController extends Controller
         $semua = DB::table('pengaduann_rahmas')
         ->join('masyarakatt_rahmas', 'pengaduann_rahmas.nik', '=', 'masyarakatt_rahmas.nik')
         ->select('masyarakatt_rahmas.nama', 'pengaduann_rahmas.*')
+        ->orderBy('id_pengaduan','DESC')
         ->get();
 
         return response()->json([
@@ -147,16 +100,37 @@ class PengaduannRahmaController extends Controller
             'status' => true,
         ]);
       }
-        
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+      
+
+    public function UpdateStatus($id,Request $request){
+        pengaduann_rahma::where('id_pengaduan', $id)->update([
+            
+            'status' => $request->status,
+        ]);
+
+        return response()->json([
+            'status' => true,
+            
+        ]);
+    }
         
+    
+    public function getProsesPetugas()
+    {
+        $semua = DB::table('pengaduann_rahmas')
+        ->join('masyarakatt_rahmas', 'pengaduann_rahmas.nik', '=', 'masyarakatt_rahmas.nik')
+        ->select('masyarakatt_rahmas.nama', 'pengaduann_rahmas.*')
+        ->orderBy('id_pengaduan','DESC')
+        ->where(function($query){
+            $query->where('pengaduann_rahmas.status','=', 'proses');
+        })
+        ->get();
+
+        return response()->json([
+            'status' => true,
+            'data' => $semua
+        ]);
     }
 
     /**

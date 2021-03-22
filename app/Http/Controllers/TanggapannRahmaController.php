@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\tanggapann_rahma;
+use App\Models\tanggapann_rahma;
 use Illuminate\Http\Request;
 
 class TanggapannRahmaController extends Controller
@@ -12,10 +12,17 @@ class TanggapannRahmaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function tanggapan(Request $request)
     {
-        //
-    }
+        $input['id_pengaduan'] =$request->id_pengaduan;
+        $input['tgl_tanggapan'] =$request->tgl_tanggapan;
+        $input['tanggapan'] =$request->tanggapan;
+        $input['id_petugas'] = $request->id_petugas;
+        $petugas = tanggapann_rahma::create($input);
+         return response()->json([
+                        'status' => true,
+                    ]);
+     }
 
     /**
      * Show the form for creating a new resource.

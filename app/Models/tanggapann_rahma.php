@@ -11,6 +11,6 @@ class tanggapann_rahma extends Model
         'id_tanggapan', 'id_pengaduan','tgl_tanggapan','tanggapan','id_petugas'
     ];
 
-    protected $table='masyarakatt_rahmas';
-    use HasFactory;
+    protected $table='tanggapann_rahmas';
+    
 }

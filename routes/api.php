@@ -18,12 +18,19 @@ Route::resource('/biomasyarakat','MasyarakattRahmaController');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::POST('/inputPengaduan','PengaduannRahmaController@inputFoto');
+
 #UPLOAD FOTO
-Route::POST('addFoto', '\App\Http\Controllers\PengaduannRahmaController@addFotoPengaduan');
+Route::POST('tambahFoto', '\App\Http\Controllers\PengaduannRahmaController@addFotoPengaduan');
 Route::POST('foto','PengaduannRahmaController@foto');
 
+#PENGADUAN
 Route::GET('getProses/{nik}', '\App\Http\Controllers\PengaduannRahmaController@getProses');
 Route::GET('getSelesai/{nik}', '\App\Http\Controllers\PengaduannRahmaController@getSelesai');
 Route::GET('getSemua', '\App\Http\Controllers\PengaduannRahmaController@getSemua');
-Route::DELETE('delete/{id}', '\App\Http\Controllers\PengaduannRahmaController@delete');
+Route::GET('delete/{id}', '\App\Http\Controllers\PengaduannRahmaController@delete');
+Route::POST('getFoto/{photo_name}', '\App\Http\Controllers\PengaduannRahmaController@getPhotoProduct');
+
+#TANGGAPAN (petugas)
+Route::POST('tanggapan', '\App\Http\Controllers\TanggapannRahmaController@tanggapan');
+Route::PUT('updateStatus/{id}','PengaduannRahmaController@UpdateStatus');
+Route::GET('getProsesPetugas', '\App\Http\Controllers\PengaduannRahmaController@getProsesPetugas');

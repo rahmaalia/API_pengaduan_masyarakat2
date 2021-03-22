@@ -21,14 +21,15 @@ class AuthController extends Controller
         if ($data) {
             $role_id=$data->role_id;
             if (Hash::check($password,$data->password)) {
-                if ($role_id = 2) {
-                    $getdata=DB::table('masyarakatt_rahmas')->join('users','masyarakatt_rahmas.user_id','users.id_user')
-                    ->select('masyarakatt_rahmas.*','users.role_id')
+
+               if ($role_id == 1) {
+                    $getdata=DB::table('petugass_rahmas')->join('users','petugass_rahmas.user_id','users.id_user')
+                    ->select('petugass_rahmas.*','users.role_id')
                     ->where('users.id_user','=',$data->id_user)
                     ->first();
                 }
 
-                if ($role_id = 1) {
+                else if ($role_id == 2) {
                     $getdata=DB::table('masyarakatt_rahmas')->join('users','masyarakatt_rahmas.user_id','users.id_user')
                     ->select('masyarakatt_rahmas.*','users.role_id')
                     ->where('users.id_user','=',$data->id_user)
