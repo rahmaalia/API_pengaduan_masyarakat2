@@ -133,15 +133,21 @@ class PengaduannRahmaController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function getSelesaiPetugas()
     {
-        //
+        $semua = DB::table('pengaduann_rahmas')
+        ->join('masyarakatt_rahmas', 'pengaduann_rahmas.nik', '=', 'masyarakatt_rahmas.nik')
+        ->select('masyarakatt_rahmas.nama', 'pengaduann_rahmas.*')
+        ->orderBy('id_pengaduan','DESC')
+        ->where(function($query){
+            $query->where('pengaduann_rahmas.status','=', 'selesai');
+        })
+        ->get();
+
+        return response()->json([
+            'status' => true,
+            'data' => $semua
+        ]);
     }
 
     /**

@@ -34,3 +34,5 @@ Route::POST('getFoto/{photo_name}', '\App\Http\Controllers\PengaduannRahmaContro
 Route::POST('tanggapan', '\App\Http\Controllers\TanggapannRahmaController@tanggapan');
 Route::PUT('updateStatus/{id}','PengaduannRahmaController@UpdateStatus');
 Route::GET('getProsesPetugas', '\App\Http\Controllers\PengaduannRahmaController@getProsesPetugas');
+Route::GET('getSelesaiPetugas', '\App\Http\Controllers\PengaduannRahmaController@getSelesaiPetugas');
+Route::GET('getTanggapan/{id}', '\App\Http\Controllers\TanggapannRahmaController@getTanggapan');
