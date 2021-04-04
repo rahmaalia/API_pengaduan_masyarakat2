@@ -50,6 +50,7 @@ class PengaduannRahmaController extends Controller
         ->where('pengaduann_rahmas.nik','=', $nik)
         ->where(function($query){
             $query->where('pengaduann_rahmas.status','=', 'proses');
+            $query->orWhere('pengaduann_rahmas.status','=', 'verifikasi');
         })
         ->orderBy('id_pengaduan','DESC')
         ->get();
@@ -82,7 +83,6 @@ class PengaduannRahmaController extends Controller
         $semua = DB::table('pengaduann_rahmas')
         ->join('masyarakatt_rahmas', 'pengaduann_rahmas.nik', '=', 'masyarakatt_rahmas.nik')
         ->select('masyarakatt_rahmas.nama', 'pengaduann_rahmas.*')
-        ->orderBy('id_pengaduan','DESC')
         ->get();
 
         return response()->json([
@@ -121,7 +121,6 @@ class PengaduannRahmaController extends Controller
         $semua = DB::table('pengaduann_rahmas')
         ->join('masyarakatt_rahmas', 'pengaduann_rahmas.nik', '=', 'masyarakatt_rahmas.nik')
         ->select('masyarakatt_rahmas.nama', 'pengaduann_rahmas.*')
-        ->orderBy('id_pengaduan','DESC')
         ->where(function($query){
             $query->where('pengaduann_rahmas.status','=', 'proses');
         })
@@ -138,7 +137,6 @@ class PengaduannRahmaController extends Controller
         $semua = DB::table('pengaduann_rahmas')
         ->join('masyarakatt_rahmas', 'pengaduann_rahmas.nik', '=', 'masyarakatt_rahmas.nik')
         ->select('masyarakatt_rahmas.nama', 'pengaduann_rahmas.*')
-        ->orderBy('id_pengaduan','DESC')
         ->where(function($query){
             $query->where('pengaduann_rahmas.status','=', 'selesai');
         })
@@ -150,15 +148,20 @@ class PengaduannRahmaController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\pengaduann_rahma  $pengaduann_rahma
-     * @return \Illuminate\Http\Response
-     */
-    public function show(pengaduann_rahma $pengaduann_rahma)
+    public function getVerifikasiPetugas()
     {
-        //
+        $semua = DB::table('pengaduann_rahmas')
+        ->join('masyarakatt_rahmas', 'pengaduann_rahmas.nik', '=', 'masyarakatt_rahmas.nik')
+        ->select('masyarakatt_rahmas.nama', 'pengaduann_rahmas.*')
+        ->where(function($query){
+            $query->where('pengaduann_rahmas.status','=', 'verifikasi');
+        })
+        ->get();
+
+        return response()->json([
+            'status' => true,
+            'data' => $semua
+        ]);
     }
 
     /**

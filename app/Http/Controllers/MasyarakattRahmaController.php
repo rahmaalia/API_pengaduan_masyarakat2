@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\masyarakatt_rahma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class MasyarakattRahmaController extends Controller
 {
@@ -14,7 +16,11 @@ class MasyarakattRahmaController extends Controller
      */
     public function index()
     {
-        //
+        $masyarakat = DB::table('masyarakatt_rahmas')
+        ->select('masyarakatt_rahmas.*')
+        ->get();
+
+        return view('masyarakat',['masyarakat' => $masyarakat]);
     }
 
     

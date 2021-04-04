@@ -20,7 +20,7 @@ class CreatePengaduannRahmasTable extends Migration
             $table->string('nik');
             $table->text('isi_laporan');
             $table->string('foto');
-            $table->enum('status',['0','proses','selesai']);
+            $table->enum('status',['0','proses','verifikasi','selesai']);
             $table->timestamps();
             $table->foreign('nik')->references('nik')->on('masyarakatt_rahmas')->onDelete('cascade');
         });

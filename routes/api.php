@@ -36,3 +36,4 @@ Route::PUT('updateStatus/{id}','PengaduannRahmaController@UpdateStatus');
 Route::GET('getProsesPetugas', '\App\Http\Controllers\PengaduannRahmaController@getProsesPetugas');
 Route::GET('getSelesaiPetugas', '\App\Http\Controllers\PengaduannRahmaController@getSelesaiPetugas');
 Route::GET('getTanggapan/{id}', '\App\Http\Controllers\TanggapannRahmaController@getTanggapan');
+Route::GET('getVerifikasiPetugas', '\App\Http\Controllers\PengaduannRahmaController@getVerifikasiPetugas');

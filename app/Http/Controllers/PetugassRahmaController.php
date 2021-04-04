@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\petugass_rahma;
+use App\Models\petugass_rahma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class PetugassRahmaController extends Controller
 {
@@ -16,7 +18,11 @@ class PetugassRahmaController extends Controller
      */
     public function index()
     {
-        //
+        $petugas = DB::table('petugass_rahmas')
+        ->select('petugass_rahmas.*')
+        ->get();
+
+        return view('petugas',['petugas' => $petugas]);
     }
 
     /**

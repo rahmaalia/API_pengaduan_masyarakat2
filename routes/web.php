@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
@@ -22,3 +22,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/login','AuthWebController@login');
+Route::post('/postlogin','AuthWebController@postlogin');
+
+Route::get('/dashboard','DashboardController@index');
+Route::get('/pengaduan','PengaduanWebController@index');
+Route::post('/pengaduan/{id}/inputTanggapan','PengaduanWebController@inputTanggapan');
+Route::get('/masyarakat','MasyarakattRahmaController@index');
+Route::get('/petugas','PetugassRahmaController@index');
+
