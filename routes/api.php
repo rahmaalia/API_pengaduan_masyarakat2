@@ -37,3 +37,8 @@ Route::GET('getProsesPetugas', '\App\Http\Controllers\PengaduannRahmaController@
 Route::GET('getSelesaiPetugas', '\App\Http\Controllers\PengaduannRahmaController@getSelesaiPetugas');
 Route::GET('getTanggapan/{id}', '\App\Http\Controllers\TanggapannRahmaController@getTanggapan');
 Route::GET('getVerifikasiPetugas', '\App\Http\Controllers\PengaduannRahmaController@getVerifikasiPetugas');
+
+#MASYARAKAT
+Route::PUT('update/{nik}','MasyarakattRahmaController@update');
+Route::PUT('updateUser/{id}','MasyarakattRahmaController@updateUser');
+Route::GET('getMasyarakat/{nik}', '\App\Http\Controllers\MasyarakattRahmaController@getMasyarakat');

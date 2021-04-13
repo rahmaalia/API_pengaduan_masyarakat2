@@ -83,6 +83,7 @@ class PengaduannRahmaController extends Controller
         $semua = DB::table('pengaduann_rahmas')
         ->join('masyarakatt_rahmas', 'pengaduann_rahmas.nik', '=', 'masyarakatt_rahmas.nik')
         ->select('masyarakatt_rahmas.nama', 'pengaduann_rahmas.*')
+        ->orderBy('id_pengaduan','DESC')
         ->get();
 
         return response()->json([
@@ -124,6 +125,7 @@ class PengaduannRahmaController extends Controller
         ->where(function($query){
             $query->where('pengaduann_rahmas.status','=', 'proses');
         })
+        ->orderBy('id_pengaduan','DESC')
         ->get();
 
         return response()->json([
@@ -140,6 +142,7 @@ class PengaduannRahmaController extends Controller
         ->where(function($query){
             $query->where('pengaduann_rahmas.status','=', 'selesai');
         })
+        ->orderBy('id_pengaduan','DESC')
         ->get();
 
         return response()->json([
@@ -156,6 +159,7 @@ class PengaduannRahmaController extends Controller
         ->where(function($query){
             $query->where('pengaduann_rahmas.status','=', 'verifikasi');
         })
+        ->orderBy('id_pengaduan','DESC')
         ->get();
 
         return response()->json([

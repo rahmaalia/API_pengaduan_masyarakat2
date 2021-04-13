@@ -11,6 +11,8 @@ class pengaduann_rahma extends Model
         'id_pengaduan', 'tgl_pengaduan','nik','isi_laporan','foto','status'
     ];
 
+    protected $primaryKey = 'id_pengaduan';
+
     protected $table='pengaduann_rahmas';
     // use HasFactory;
 }

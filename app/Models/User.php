@@ -26,13 +26,14 @@ class User extends Authenticatable
         'role_id',
     ];
 
+    protected $primaryKey = 'id_user';
+
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = [
-        'password',
         'remember_token',
     ];
 
