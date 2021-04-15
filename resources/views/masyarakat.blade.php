@@ -5,6 +5,21 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
+                            @if(session('sukses'))
+                                <div class="alert alert-success" role="alert">
+                                Data berhasil diedit
+                                </div>
+                            @endif
+                            @if(session('tambah'))
+                                <div class="alert alert-success" role="alert">
+                                Data berhasil ditambah
+                                </div>
+                            @endif
+                            @if(session('hapus'))
+                                <div class="alert alert-success" role="alert">
+                                Data berhasil dihapus
+                                </div>
+                            @endif
                             <div class="panel">
 								<div class="panel-heading">
 									<h3 class="panel-title">Masyarakat</h3>
@@ -33,7 +48,7 @@
                                                 <td>{{$masy->telp}}</td>
                                                 <td><a href="/deleteMasyarakat/{{$masy->user_id}}" class="btn btn-danger btn-sm" onclick="return confirm('apakah anda yakin?')">
                                                 <i class="fa fa-trash-o"></i></a>
-                                                <a href="/" class="btn btn-warning btn-sm">
+                                                <a href="/edits/{{$masy->user_id}}" class="btn btn-warning btn-sm">
                                                 <i class="lnr lnr-pencil"></i></a></td>
                                             </tr>
                                             @endforeach

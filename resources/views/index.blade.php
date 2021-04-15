@@ -18,16 +18,20 @@
 								<div class="col-md-4">
                                     <form action="/search" method="post" class="row g-3">
                                         @csrf
-                                        <!-- <input class="form-control" type="text" name="search">
-                                        <input type="submit" value="cari" class="btn btn-warning btn-sm"> -->
-                                        
                                         <div class="input-group">
 										<input class="form-control" type="text" name="search">
 										<span class="input-group-btn"><input type="submit" value="cari" class="btn btn-warning btn-sm"></span>
 									</div>
                                     </form>
                                     </div>	
+                                    <!-- <select  id="filter-status" class="form-control">
+                                        <option value="">semua</option>
+                                        <option value="">proses</option>
+                                        <option value="">verifikasi</option>
+                                        <option value="">selesai</option>
+                                    </select> -->
 								</div>
+                                
 								<div class="panel-body">
                                       
 									<table class="table table-hover">

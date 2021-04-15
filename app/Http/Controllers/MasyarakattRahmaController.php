@@ -81,17 +81,17 @@ class MasyarakattRahmaController extends Controller
         DB::table('masyarakatt_rahmas')->where('user_id', $id)->delete();                           
         $data->delete();
 
-        return redirect("/masyarakat");
+        return redirect("/masyarakat")->with('hapus','Data berhasil ditambah');
       }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        $masyarakat = masyarakatt_rahma::where('user_id', $id)->get();
-        return view('tambahmasyarakat',['p' => $pengaduan, 't' => $tanggapan]);
+        // $masyarakat = masyarakatt_rahma::where('user_id', $id)->get();
+        return view('tambahmasyarakat');
         
     }
 
@@ -107,12 +107,12 @@ class MasyarakattRahmaController extends Controller
 
         if($request->password != $request->k_password){
             Session::flash('gagal','konfirmasi kata sandi tidak cocok!');
-            return view('/tambahpetugas');
+            return view('tambahmasyarakat');
         }
         else {
             if($cek > 0 ){
                 Session::flash('ada','username sudah terdaftar');
-                return view('/tambahpetugas');
+                return view('tambahmasyarakat');
             }
             else {
                 $user = User::create([
@@ -131,33 +131,36 @@ class MasyarakattRahmaController extends Controller
                     'user_id' => $user->id_user
                 ]);
         
-                return redirect("/masyarakat");
+                return redirect("/masyarakat")->with('tambah','Data berhasil ditambah');
             }
 
             
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\masyarakatt_rahma  $masyarakatt_rahma
-     * @return \Illuminate\Http\Response
-     */
-    public function show(masyarakatt_rahma $masyarakatt_rahma)
+    public function editmasyarakat(Request $request,$id)
     {
-        //
+        User::where('id_user', $id)->update([
+            
+            'username' => $request->username,
+
+        ]);
+
+        masyarakatt_rahma::where('user_id', $id)->update([
+            
+            'nik' => $request->nik,
+            'nama' => $request->nama,
+            'username' => $request->username,
+            'telp' => $request->telp
+
+        ]);
+        return redirect("/masyarakat")->with('sukses','Data berhasil di edit');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\masyarakatt_rahma  $masyarakatt_rahma
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(masyarakatt_rahma $masyarakatt_rahma)
+    public function edit($id)
     {
-        //
+        $masyarakat = masyarakatt_rahma::where('user_id', $id)->get();
+        return view('editmasyarakat',['masyarakat' => $masyarakat]);
     }
 
     

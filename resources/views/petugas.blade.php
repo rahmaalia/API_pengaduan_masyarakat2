@@ -5,6 +5,21 @@
                     <div class="container-fluid">
                         <div class="row">
                                 <div class="col-md-12">
+                                @if(session('edit'))
+                                <div class="alert alert-success" role="alert">
+                                Data berhasil diedit
+                                </div>
+                                @endif
+                                @if(session('tambah'))
+                                    <div class="alert alert-success" role="alert">
+                                    Data berhasil ditambah
+                                    </div>
+                                @endif
+                                @if(session('hapus'))
+                                    <div class="alert alert-success" role="alert">
+                                    Data berhasil dihapus
+                                    </div>
+                                @endif
                                 <div class="panel">
                                   <div class="panel-heading">
                                     <h3 class="panel-title">Petugas</h3>

@@ -84,7 +84,7 @@ class PetugassRahmaController extends Controller
                     'user_id' => $user->id_user
                 ]);
         
-                return redirect("/petugas");
+                return redirect("/petugas")->with('tambah','Data berhasil ditambah');
             }
 
             
@@ -106,7 +106,7 @@ class PetugassRahmaController extends Controller
         DB::table('petugass_rahmas')->where('user_id', $id)->delete();                           
         $data->delete();
 
-        return redirect("/petugas");
+        return redirect("/petugas")->with('hapus','Data berhasil ditambah');
       }
 
     
@@ -134,7 +134,7 @@ class PetugassRahmaController extends Controller
             // 'user_id' => $user->user_id
 
         ]);
-        return redirect("/petugas");
+        return redirect("/petugas")->with('edit','Data berhasil ditambah');
     }
 
     /**

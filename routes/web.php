@@ -40,6 +40,8 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('/deleteMasyarakat/{id}','MasyarakattRahmaController@delete');
     Route::post('/tambahmasyarakat','MasyarakattRahmaController@store');
     Route::get('/tambahmasyarakat','MasyarakattRahmaController@create');
+    Route::post('/updatemasyarakat/{id}','MasyarakattRahmaController@editmasyarakat');
+    Route::get('/edits/{id}','MasyarakattRahmaController@edit');
 
     #PETUGAS
     Route::post('/update/{id}','PetugassRahmaController@editpetugas');

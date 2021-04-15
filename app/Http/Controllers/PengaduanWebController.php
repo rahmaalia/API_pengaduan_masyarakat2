@@ -52,6 +52,8 @@ class PengaduanWebController extends Controller
     public function search(Request $request){
         $query = $request->search;
         $pengaduan = Pengaduann_rahma::where('status','like','%'.$query.'%')
+        ->orWhere('tgl_pengaduan','like','%'.$query.'%')
+        ->orWhere('isi_laporan','like','%'.$query.'%')
         ->paginate(10);
         return view('index', compact('pengaduan'));
 

@@ -30,8 +30,10 @@
                 <h3>Tambah Masyarakat</h3>
                     <div class="panel panel-headline">
                         <div class="panel-body">
+                            <h5>NIK </h5>
+                            <input class="form-control" placeholder="nik " type="text" name="nik">
                             <h5>Nama </h5>
-                            <input class="form-control" placeholder="nama " type="text" name="nama_petugas">
+                            <input class="form-control" placeholder="nama " type="text" name="nama">
                             <h5>Nama Pengguna</h5>
                             <input class="form-control" placeholder="nama Pengguna" type="text" name="username">
                             <h5>No Telp</h5>
